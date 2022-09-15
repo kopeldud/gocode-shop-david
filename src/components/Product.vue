@@ -1,33 +1,28 @@
 <script lang="ts">
-import { defineComponent } from "vue";
+import type { jsonData } from "@/Models/JsonData";
+import { defineComponent, type PropType } from "vue";
 
 export default defineComponent({
   name: "Products",
+  props: {
+    item: Object as PropType<jsonData>,
+  },
 });
 </script>
 
 <template>
-  <div>
-    <div class="product-card">
-      <div class="product-image">
-        <img
-          src="https://cdn.shopify.com/s/files/1/0938/8938/products/10231100205_1_1315x1800_300_CMYK_1024x1024.jpeg?v=1445623369"
-        />
-      </div>
-      <div class="product-info">
-        <h5>Winter Jacket</h5>
-        <h6>$99.99</h6>
-      </div>
+  <div class="product-card">
+    <div class="product-image">
+      <img :src="item?.image" />
+    </div>
+    <div class="product-info">
+      <h5>{{ item?.title }}</h5>
+      <h6>{{ item?.price }}</h6>
     </div>
   </div>
 </template>
 
 <style scoped>
-.product-info {
-  margin-top: auto;
-  padding-top: 20px;
-  text-align: center;
-}
 .product-card {
   display: flex;
   flex-direction: column;
@@ -43,30 +38,26 @@ export default defineComponent({
   width: 100%;
 }
 
-label {
-  color: #666;
-  font-size: 10px;
-  font-weight: 500;
-  line-height: 2em;
-  text-transform: uppercase;
-}
-
-@media (max-width: 600px) {
-  .product-card {
-    flex: 1 46%;
-  }
+.product-info {
+  margin-top: auto;
+  padding-top: 20px;
+  text-align: center;
 }
 
 @media (max-width: 920px) {
   .product-card {
     flex: 1 21%;
   }
-}
 
-@media (max-width: 920px) {
   .products .product-card:first-child,
   .products .product-card:nth-child(2) {
     flex: 2 46%;
+  }
+}
+
+@media (max-width: 600px) {
+  .product-card {
+    flex: 1 46%;
   }
 }
 </style>

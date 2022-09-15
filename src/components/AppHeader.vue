@@ -1,12 +1,19 @@
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, type PropType } from "vue";
 import Product from "./Product.vue";
 
 export default defineComponent({
   name: "AppHaeder",
   components: {
-    Product: Product,
+    Product,
   },
+  props: {
+    categories: [] as PropType<string[]>,
+  },
+  data() {
+    return {};
+  },
+  emits: ["selectCategory"],
 });
 </script>
 
@@ -17,15 +24,14 @@ export default defineComponent({
     <div class="sort">
       <div class="collection-sort">
         <label>Filter by:</label>
-        <select>
-          <option value="/">All Jackets</option>
-          <option value="/">2016</option>
-          <option value="/">jacket</option>
-          <option value="/">Jackets</option>
-          <option value="/">layers</option>
-          <option value="/">Obermeyer</option>
-          <option value="/">Roxy</option>
-          <option value="/">womens</option>
+        <select
+          @change="
+            $emit('selectCategory', ($event.target as HTMLSelectElement).value)
+          "
+        >
+          <option v-for="category in categories">
+            {{ category }}
+          </option>
         </select>
       </div>
 

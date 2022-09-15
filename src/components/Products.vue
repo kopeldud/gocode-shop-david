@@ -1,21 +1,25 @@
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, type PropType } from "vue";
 import Product from "./Product.vue";
+import type { jsonData } from "@/Models/JsonData";
 
 export default defineComponent({
   name: "Products",
   components: { Product },
+  props: {
+    products: Object as PropType<jsonData[]>,
+  },
+  //   computed: {
+  //     products() {
+  //     return [{...products}]
+  //   }
+  // }
 });
 </script>
 
 <template>
   <section class="products">
-    <Product />
-    <Product />
-    <Product />
-    <Product />
-    <Product />
-    <Product />
+    <Product v-for="item in products" :item="item" />
   </section>
 </template>
 
@@ -24,7 +28,5 @@ export default defineComponent({
   display: flex;
   flex-wrap: wrap;
 }
-
-
 </style>
 
