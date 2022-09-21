@@ -2,6 +2,9 @@
 import { defineComponent, type PropType } from "vue";
 import Product from "./Product.vue";
 
+//const props = defineProps(['title'])
+//const emit = defineEmits(['enlarge-text'])
+
 export default defineComponent({
   name: "AppHaeder",
   components: {

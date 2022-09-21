@@ -1,13 +1,17 @@
-<script lang="ts">
+<script setup lang="ts">
 import type { jsonData } from "@/Models/JsonData";
+import { useCartStore } from "@/stores/cart";
 import { defineComponent, type PropType } from "vue";
 
-export default defineComponent({
-  name: "Products",
-  props: {
-    item: Object as PropType<jsonData>,
-  },
-});
+const props = defineProps<{
+  item: jsonData;
+}>();
+
+const cart = useCartStore();
+function addProductToCart(prod: jsonData) {
+  cart.addToCart(prod);
+  console.log("add?1");
+}
 </script>
 
 <template>
@@ -18,6 +22,11 @@ export default defineComponent({
     <div class="product-info">
       <h5>{{ item?.title }}</h5>
       <h6>{{ item?.price }}</h6>
+    </div>
+    <div class="flex">
+      <span> - </span>
+      <input type="button" value="Add to cart" :click="addProductToCart" />
+      <span> + </span>
     </div>
   </div>
 </template>
@@ -42,6 +51,9 @@ export default defineComponent({
   margin-top: auto;
   padding-top: 20px;
   text-align: center;
+}
+
+.flex {
 }
 
 @media (max-width: 920px) {

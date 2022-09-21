@@ -9,11 +9,9 @@ export default defineComponent({
   props: {
     products: Object as PropType<jsonData[]>,
   },
-  //   computed: {
-  //     products() {
-  //     return [{...products}]
-  //   }
-  // }
+  computed: {
+    products() {},
+  },
 });
 </script>
 
